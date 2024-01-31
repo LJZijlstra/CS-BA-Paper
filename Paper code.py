@@ -35,7 +35,7 @@ screen_resolutions = ['720p', '1080p', '4K']
 screen_refresh_rates = ['50/60hz', '60hz', '120hz', '240hz', '600hz']
 
 
-############### DATA CLEANING ###############
+################## DATA CLEANING #####################
 def cleaning_data(data):
     modelid_uncleaned = (data['modelID'])
     title_uncleaned = (data['title'])
@@ -114,7 +114,7 @@ def cleaning_data(data):
 
 print(cleaning_data(df))
 
-################# FUNCTIONS ####################
+#################### FUNCTIONS ########################
 # Cosine distance
 def cosine_distance(a, b):
     similar = np.dot(a, b) / (np.linalg.norm(a) * np.linalg.norm(b))
@@ -184,6 +184,7 @@ def candidate_matrix(band_list, bands):
 
 # Dissimilarity matrix
 def disMatrix(candidate, input_matrix, data):
+    # Selecting the features to use for the dissimilarity
     shop = data['shop']
     brand = data['brand']
     resolution = data['resolution']
@@ -273,6 +274,7 @@ def performance(data, bands, rows, threshold):
     n_comps_possible = len(data) * (len(data)-1) * 0.5
     frac_comps = n_comps / n_comps_possible
 
+    # Pair Quality and Pair Completeness
     PQ = n_true_positives / n_comps
     PC = n_true_positives / n_actual_duplicates
 
@@ -285,7 +287,7 @@ def performance(data, bands, rows, threshold):
     return n_potential_duplicates, n_true_positives, PQ, PC, F1_score, F1_star, frac_comps
 
 
-# Bootstrap
+####################### BOOTSTRAP #####################################
 def bootstrap_function(data, n_bootstraps, bands, rows, threshold):
     performance_measures = np.zeros((n_bootstraps, 7))
 
@@ -328,6 +330,9 @@ for result in results_bootstrap:
     PQ.append(np.mean(result[2]))
 
 
+####################### PLOTS ##############################
+
+# Plots for each performance measure
 plt.plot(frac_comps, F1_score, linewidth=2, color='teal', marker='o')
 plt.grid()
 plt.title('F1 score', fontsize=16, color='navy')
