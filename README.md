@@ -1,0 +1,3 @@
+Paper Scalable Product Duplicate Detection
+
+The purpose of this project is finding duplicate TV models that are sold on different sites. Locality-Sensitive Hashing is executed using information from the title. For this project, Python is used as programming language. The corresponding code can be found in this repository. The first part of the code is loading the dataset containing product descriptions of 1624 TVs. The second part is the data cleaning step. The third part states all the functions needed for this research. The fourth part gives the bootstrap simulation and the final results, where in the final part the complementary plots are given.
